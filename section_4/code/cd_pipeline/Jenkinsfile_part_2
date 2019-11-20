@@ -42,6 +42,10 @@ pipeline {
 
 // steps
 def buildApp() {
+	withCredentials([string(credentialsId: 'slack', variable: 'token')]) {
+		sh "echo token"
+		sh "echo ${token}"
+	}
 	dir ('section_4/code/cd_pipeline' ) {
 		def appImage = docker.build("hands-on-jenkins/myapp:${BUILD_NUMBER}")
 	}
